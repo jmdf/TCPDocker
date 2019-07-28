@@ -6,7 +6,7 @@ The idea is to have a way to create servers for [The Classic Pack](https://www.t
 
 The command to start the server:
 ```
-docker run -dti -p 25565:25565 tcpdocker
+docker run -dti --name theclassipack_server -p 25565:25565 theclassicpack
 ```
 
 Note that the `ti` options are required to allow the admins to access the server console.
@@ -16,7 +16,7 @@ Note that the `ti` options are required to allow the admins to access the server
 To access the server console run:
 
 ```
-docker attach <container_name>
+docker attach theclassipack_server
 ``` 
 
 To exit **do not** run `CTRL+c`, instead use the key combination `CTRL+p` followed by `CTRL+q`
