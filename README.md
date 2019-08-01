@@ -20,3 +20,63 @@ docker attach theclassipack_server
 ``` 
 
 To exit **do not** run `CTRL+c`, instead use the key combination `CTRL+p` followed by `CTRL+q`
+
+## Managing the server
+
+Useful commands to use on the server console
+
+* Whitelist a player
+```
+whitelist add <username>
+```
+
+* Remove player from whitelist
+```
+whitelist remove <username>
+```
+
+* List all whitelist players
+```
+whitelist list
+```
+
+* OP user
+```
+op <username>
+```
+
+* DeOP user
+```
+deop <username>
+```
+
+## Backup server state
+
+A cron job can be used to regularly backup the server.
+The following setup is for a daily backup, where the older files is overwritten by the new one which has the same name.
+
+Create a script
+```
+#!/bin/bash
+
+WD_TMP=/tmp/wd_minecraft_backup
+DAY=$(date +%A)
+
+# Create and set working directory
+mkdir $WD_TMP
+cd $WD_TMP
+
+# Copy server folder from container
+docker cp theclassipack_server:/opt/minecraft .
+
+# Compress backup to reduce space
+tar czf /path/to/backupdir/$DAY-minecraft_sv_backup.tar.gz minecraft
+
+# Cleanup temp directory
+rm -rf $WD_TMP
+```
+
+Setup a cronjob, this runs every day at 4.30AM 
+```
+crontab -e
+30 4 * * * /path/to/script
