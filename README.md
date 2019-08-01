@@ -2,11 +2,18 @@
 
 The idea is to have a way to create servers for [The Classic Pack](https://www.technicpack.net/modpack/tc-redux.786294) using Docker.
 
+## Motivation
+
+Most guides on how to run a minecraft server use `screen` to start it but I rather use docker mainly because:
+* The ability to automatically restart the server on crash or reboot
+* Easier to cleanup
+* I like to work with containers :)
+
 ## Starting the server
 
 The command to start the server:
 ```
-docker run -dti --name theclassipack_server -p 25565:25565 theclassicpack
+docker run -dti --restart always --name theclassipack_server -p 25565:25565 theclassicpack
 ```
 
 Note that the `ti` options are required to allow the admins to access the server console.
