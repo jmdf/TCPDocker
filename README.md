@@ -87,3 +87,4 @@ Setup a cronjob, this runs every day at 4.30AM
 ```
 crontab -e
 30 4 * * * /path/to/script
+```
